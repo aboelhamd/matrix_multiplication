@@ -9,18 +9,18 @@ FILE* get_file(char* file_path);
 void write_line_to_file(FILE* file, char* line);
 
 // read a line from the given file
-char* read_line_from_file(FILE* file);
+void read_line_from_file(FILE* file, char line[512]);
 
 // read row and column values in first line of the given file and put them in the given pointers
 void read_row_col_nums(int* row, int* col, FILE* file);
 
 // read matrix from the given file an put it in the given 2D array pointer
-void read_matrix(int* matrix[][], FILE* file);
+void read_matrix(int row, int col, int matrix[row][col], FILE* file);
 
 // read line (row of matrix) from the given file and put it in the given array pointer
 void read_row(int* row[], FILE* file);
 
 // write the given matrix to the given file
-void write_matrix(int matrix[][], FILE* file);
+void write_matrix(int row, int col, int matrix[row][col], FILE* file);
 
 #endif /* FILE_PROCESSING_H_ */

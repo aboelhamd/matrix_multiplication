@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "file_processing.h"
 
 FILE* get_file(char* file_path) {
@@ -12,28 +14,56 @@ void write_line_to_file(FILE* file, char* line) {
 	fputs("\n", file);
 }
 
-char* read_line_from_file(FILE* file) {
-	char line[512];
+void read_line_from_file(FILE* file, char line[512]) {
 	if (fgets(line, 512, file)) {
 		// remove the '\n' from the line
 		if (line[strlen(line) - 1] == '\n')
 			line[strlen(line) - 1] = '\0';
 	}
-	return line;
 }
 
 void read_row_col_nums(int* row, int* col, FILE* file) {
+	// read the line "row=x col=y"
+	char line[512];
+	read_line_from_file(file, line);
 
+	// get row and column numbers by removing all non-number chars
+	// then convert string into integers
+	char* num = strtok(line, "rowcl= \t");
+	*row = strtol(num, &num, 10);
+
+	num = strtok(NULL, "rowcl= \t");
+	*col = strtol(num, &num, 10);
 }
 
-void read_matrix(int* matrix[][], FILE* file) {
+void read_matrix(int row, int col, int matrix[row][col], FILE* file) {
+	char line[512];
 
+	// read the corresponding row
+	for (int i = 0; i < row; i++) {
+		read_line_from_file(file, line);
+		char*row = line;
+
+		// extract the corresponding column and saves it in the matrix
+		for (int j = 0; j < col; j++) {
+			matrix[i][j] = strtol(row, &row, 10);
+		}
+	}
 }
 
-void read_row(int* row[], FILE* file) {
+void write_matrix(int row, int col, int matrix[row][col], FILE* file) {
+	char* line = malloc(512);
 
-}
+	for (int i = 0; i < row; i++) {
+		memset(line, 0, 512);
 
-void write_matrix(int matrix[][], FILE* file) {
+		// put each number one by one in the line
+		for (int j = 0; j < col; j++) {
+			sprintf(line, "%s %d", line, matrix[i][j]);
+		}
 
+		// write the line to the file
+		write_line_to_file(file, line);
+	}
+	free(line);
 }

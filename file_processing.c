@@ -49,6 +49,8 @@ void read_matrix(int row, int col, int matrix[row][col], FILE* file) {
 			matrix[i][j] = strtol(row, &row, 10);
 		}
 	}
+
+	fclose(file);
 }
 
 void write_matrix(int row, int col, int matrix[row][col], FILE* file) {
@@ -66,4 +68,5 @@ void write_matrix(int row, int col, int matrix[row][col], FILE* file) {
 		write_line_to_file(file, line);
 	}
 	free(line);
+	fclose(file);
 }

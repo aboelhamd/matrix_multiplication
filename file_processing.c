@@ -36,31 +36,32 @@ void read_row_col_nums(int* row, int* col, FILE* file) {
 	*col = strtol(num, &num, 10);
 }
 
-void read_matrix(int row, int col, int matrix[row][col], FILE* file) {
+void read_matrix(int row_num, int col_num, int** matrix, FILE* file) {
 	char line[512];
 
 	// read the corresponding row
-	for (int i = 0; i < row; i++) {
+	for (int i = 0; i < row_num; i++) {
 		read_line_from_file(file, line);
 		char*row = line;
+//		printf("%d  %d\n", i, row_num);
 
 		// extract the corresponding column and saves it in the matrix
-		for (int j = 0; j < col; j++) {
+		for (int j = 0; j < col_num; j++) {
 			matrix[i][j] = strtol(row, &row, 10);
+//			printf("%d ", matrix[i][j]);
 		}
+//		printf("\n");
 	}
-
-	fclose(file);
 }
 
-void write_matrix(int row, int col, int matrix[row][col], FILE* file) {
+void write_matrix(int row_num, int col_num, int** matrix, FILE* file) {
 	char* line = malloc(512);
 
-	for (int i = 0; i < row; i++) {
+	for (int i = 0; i < row_num; i++) {
 		memset(line, 0, 512);
 
 		// put each number one by one in the line
-		for (int j = 0; j < col; j++) {
+		for (int j = 0; j < col_num; j++) {
 			sprintf(line, "%s %d", line, matrix[i][j]);
 		}
 
@@ -68,5 +69,4 @@ void write_matrix(int row, int col, int matrix[row][col], FILE* file) {
 		write_line_to_file(file, line);
 	}
 	free(line);
-	fclose(file);
 }

@@ -15,12 +15,12 @@ void read_line_from_file(FILE* file, char line[512]);
 void read_row_col_nums(int* row, int* col, FILE* file);
 
 // read matrix from the given file an put it in the given 2D array pointer
-void read_matrix(int row, int col, int matrix[row][col], FILE* file);
+void read_matrix(int row, int col, int** matrix, FILE* file);
 
 // read line (row of matrix) from the given file and put it in the given array pointer
 void read_row(int* row[], FILE* file);
 
 // write the given matrix to the given file
-void write_matrix(int row, int col, int matrix[row][col], FILE* file);
+void write_matrix(int row, int col, int** matrix, FILE* file);
 
 #endif /* FILE_PROCESSING_H_ */

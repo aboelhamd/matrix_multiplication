@@ -3,9 +3,14 @@
 #include <stdlib.h>
 #include "file_processing.h"
 
-FILE* get_file(char* file_path) {
+FILE* get_file_read(char* file_path) {
 	// open file or create it if not found
-	return fopen(file_path, "a+");
+	return fopen(file_path, "r+");
+}
+
+FILE* get_file_write(char* file_path) {
+	// open file or create it if not found
+	return fopen(file_path, "w+");
 }
 
 void write_line_to_file(FILE* file, char* line) {
@@ -43,14 +48,11 @@ void read_matrix(int row_num, int col_num, int** matrix, FILE* file) {
 	for (int i = 0; i < row_num; i++) {
 		read_line_from_file(file, line);
 		char*row = line;
-//		printf("%d  %d\n", i, row_num);
 
 		// extract the corresponding column and saves it in the matrix
 		for (int j = 0; j < col_num; j++) {
 			matrix[i][j] = strtol(row, &row, 10);
-//			printf("%d ", matrix[i][j]);
 		}
-//		printf("\n");
 	}
 }
 
@@ -62,7 +64,7 @@ void write_matrix(int row_num, int col_num, int** matrix, FILE* file) {
 
 		// put each number one by one in the line
 		for (int j = 0; j < col_num; j++) {
-			sprintf(line, "%s %d", line, matrix[i][j]);
+			sprintf(line, "%s%d\t", line, matrix[i][j]);
 		}
 
 		// write the line to the file

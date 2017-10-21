@@ -2,8 +2,10 @@
 #define FILE_PROCESSING_H_
 #include <stdio.h>
 
-// Open the given file for reading or writing and return it
-FILE* get_file(char* file_path);
+// Open the given file for reading and return it
+FILE* get_file_read(char* file_path);
+// Open the given file for writing and return it
+FILE* get_file_write(char* file_path);
 
 // write a line to the given file
 void write_line_to_file(FILE* file, char* line);

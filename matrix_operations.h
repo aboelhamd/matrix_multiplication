@@ -1,7 +1,7 @@
 #ifndef MATRIX_OPERATIONS_H_
 #define MATRIX_OPERATIONS_H_
 
-int **mat_in1, **mat_in2, **mat_out;
+long int **mat_in1, **mat_in2, **mat_out;
 int row_num1, row_num2, col_num1, col_num2;
 
 // multiply the two input matrix (by thread per element method)

@@ -41,7 +41,7 @@ void read_row_col_nums(int* row, int* col, FILE* file) {
 	*col = strtol(num, &num, 10);
 }
 
-void read_matrix(int row_num, int col_num, int** matrix, FILE* file) {
+void read_matrix(int row_num, int col_num, long int** matrix, FILE* file) {
 	char line[512];
 
 	// read the corresponding row
@@ -56,7 +56,7 @@ void read_matrix(int row_num, int col_num, int** matrix, FILE* file) {
 	}
 }
 
-void write_matrix(int row_num, int col_num, int** matrix, FILE* file) {
+void write_matrix(int row_num, int col_num, long int** matrix, FILE* file) {
 	char* line = malloc(512);
 
 	for (int i = 0; i < row_num; i++) {
@@ -64,7 +64,7 @@ void write_matrix(int row_num, int col_num, int** matrix, FILE* file) {
 
 		// put each number one by one in the line
 		for (int j = 0; j < col_num; j++) {
-			sprintf(line, "%s%d\t", line, matrix[i][j]);
+			sprintf(line, "%s%ld\t", line, matrix[i][j]);
 		}
 
 		// write the line to the file

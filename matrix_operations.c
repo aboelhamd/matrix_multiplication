@@ -15,7 +15,7 @@ void* element_mul(void* args) {
 	param* params = args;
 	int i = params->i, j = params->j;
 
-	int sum_of_mul = 0;
+	long int sum_of_mul = 0;
 	for (int k = 0; k < row_num2; k++) {
 		sum_of_mul += mat_in1[i][k] * mat_in2[k][j];
 	}
@@ -30,7 +30,7 @@ void* row_mul(void* args) {
 	int i = params->i;
 
 	for (int j = 0; j < col_num2; j++) {
-		int sum_of_mul = 0;
+		long int sum_of_mul = 0;
 		for (int k = 0; k < row_num2; k++) {
 			sum_of_mul += mat_in1[i][k] * mat_in2[k][j];
 		}
@@ -106,19 +106,19 @@ void multiply_row_thread() {
 }
 
 void allocate_matrices() {
-	mat_in1 = malloc((size_t) row_num1 * sizeof(int*));
+	mat_in1 = malloc((size_t) row_num1 * sizeof(long int*));
 	for (int i = 0; i < row_num1; i++) {
-		mat_in1[i] = malloc((size_t) col_num1 * sizeof(int));
+		mat_in1[i] = malloc((size_t) col_num1 * sizeof(long int));
 	}
 
-	mat_in2 = malloc((size_t) row_num2 * sizeof(int*));
+	mat_in2 = malloc((size_t) row_num2 * sizeof(long int*));
 	for (int i = 0; i < row_num2; i++) {
-		mat_in2[i] = malloc((size_t) col_num2 * sizeof(int));
+		mat_in2[i] = malloc((size_t) col_num2 * sizeof(long int));
 	}
 
-	mat_out = malloc((size_t) row_num1 * sizeof(int*));
+	mat_out = malloc((size_t) row_num1 * sizeof(long int*));
 	for (int i = 0; i < row_num1; i++) {
-		mat_out[i] = malloc((size_t) col_num2 * sizeof(int));
+		mat_out[i] = malloc((size_t) col_num2 * sizeof(long int));
 	}
 }
 
